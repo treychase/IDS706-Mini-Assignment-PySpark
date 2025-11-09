@@ -1,0 +1,23 @@
+# PySpark Data Processing Assignment - Dependencies
+
+# Core PySpark
+pyspark>=3.4.0
+
+# Data manipulation and analysis
+pandas>=1.5.0
+numpy>=1.23.0
+
+# Visualization (optional but recommended)
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# Jupyter notebook support
+jupyter>=1.0.0
+notebook>=6.5.0
+ipykernel>=6.19.0
+
+# HTML export
+nbconvert>=7.2.0
+
+# Additional utilities
+pyarrow>=10.0.0  # For better Parquet support
