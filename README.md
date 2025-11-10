@@ -11,6 +11,17 @@ This notebook (`statcast_analysis.ipynb`) provides a comprehensive PySpark analy
 
 ---
 
+## Screenshots
+
+![36B6B453-2743-45B3-816A-F0502C9DA887](https://github.com/user-attachments/assets/866dda16-f670-443e-8b3f-30a2a27f2a19)
+
+![A7C1BA23-BEB3-4F1A-A70E-F1163AE82FAE](https://github.com/user-attachments/assets/07b5bbb9-c44c-4780-a604-01276412fff6)
+
+![31D974F0-9EE8-4923-A1CF-7120B07A744C](https://github.com/user-attachments/assets/ae1c3433-bd97-461f-877f-a699a6ff55ac)
+
+![5A3D96A7-96F2-43C4-9410-2FD21513F5CC](https://github.com/user-attachments/assets/441f8ff1-2d2c-4718-bea3-7a097a6a6d01)
+
+
 ## Data
 
 **Source Files**: `data/statcast_*.csv` (5 years: 2017-2021)
@@ -548,7 +559,3 @@ Spark dynamically optimizes during execution:
 - **PySpark Documentation**: https://spark.apache.org/docs/latest/api/python/
 - **Spark SQL Tuning**: https://spark.apache.org/docs/latest/sql-performance-tuning.html
 
----
-
-**Status**: ✅ Complete, tested, and production-ready  
-**Last Updated**: November 10, 2025
