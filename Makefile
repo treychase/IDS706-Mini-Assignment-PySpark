@@ -33,7 +33,8 @@ help: ## Show this help message
 	@echo "$(GREEN)Setup Commands:$(NC)"
 	@echo "  make install        - Install Python dependencies"
 	@echo "  make setup          - Full setup (install + create directories)"
-	@echo "  make download-data  - Download NYC Taxi dataset (~3GB)"
+	@echo "  make download-data  - Download NYC Taxi dataset (~24GB)"
+	@echo "  make merge-data     - Merge all parquet files into one"
 	@echo ""
 	@echo "$(GREEN)Run Commands:$(NC)"
 	@echo "  make run            - Start Jupyter notebook"
@@ -52,7 +53,7 @@ help: ## Show this help message
 	@echo "  make package        - Create submission zip file"
 	@echo ""
 	@echo "$(GREEN)Common Workflows:$(NC)"
-	@echo "  make all            - Setup + download data + run notebook"
+	@echo "  make all            - Setup + download + merge + run notebook"
 	@echo "  make quick-start    - Setup + run (assumes data exists)"
 	@echo ""
 	@echo "$(YELLOW)Note: Run 'make check' first to verify prerequisites$(NC)"
@@ -106,7 +107,7 @@ setup: check install ## Complete setup (check, install, create directories)
 
 download-data: ## Download NYC Taxi dataset
 	@echo "$(BLUE)Starting data download...$(NC)"
-	@echo "$(YELLOW)This will download ~3GB of data. Continue? [y/N]$(NC)"
+	@echo "$(YELLOW)This will download ~24GB of data (2023-2024). Continue? [y/N]$(NC)"
 	@read -r response; \
 	if [ "$$response" = "y" ] || [ "$$response" = "Y" ]; then \
 		$(PYTHON) download_data.py; \
@@ -114,6 +115,15 @@ download-data: ## Download NYC Taxi dataset
 	else \
 		echo "$(YELLOW)Download cancelled.$(NC)"; \
 	fi
+
+merge-data: ## Merge all parquet files into one combined file
+	@echo "$(BLUE)Merging parquet files...$(NC)"
+	@if [ ! -d $(DATA_DIR) ] || [ ! "$$(ls -A $(DATA_DIR)/*.parquet 2>/dev/null | grep -v combined)" ]; then \
+		echo "$(RED)No data files found. Run 'make download-data' first.$(NC)"; \
+		exit 1; \
+	fi
+	@$(PYTHON) merge_parquet.py
+	@echo "$(GREEN)✓ Files merged successfully!$(NC)"
 
 run: ## Start Jupyter notebook
 	@echo "$(BLUE)Starting Jupyter Notebook...$(NC)"
@@ -173,7 +183,7 @@ clean: ## Remove output files (keep data)
 	@echo "$(GREEN)✓ Output files cleaned!$(NC)"
 
 clean-all: clean ## Remove everything including downloaded data
-	@echo "$(RED)This will delete ALL data (~3GB). Continue? [y/N]$(NC)"
+	@echo "$(RED)This will delete ALL data (~12GB). Continue? [y/N]$(NC)"
 	@read -r response; \
 	if [ "$$response" = "y" ] || [ "$$response" = "Y" ]; then \
 		rm -rf $(DATA_DIR)/*.parquet; \
@@ -214,7 +224,7 @@ package: prepare-submit ## Create submission zip file
 		-x "*.gitkeep" "*.DS_Store"; \
 	echo "$(GREEN)✓ Package created: $$ZIP_FILE$(NC)"
 
-all: setup download-data run ## Complete workflow: setup, download, and run
+all: setup download-data merge-data run ## Complete workflow: setup, download, merge, and run
 
 quick-start: setup run ## Quick start (assumes data exists)
 

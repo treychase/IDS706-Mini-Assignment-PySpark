@@ -3,7 +3,7 @@
 Download NYC Taxi Trip Data
 
 This script downloads NYC Yellow Taxi trip data from the official source.
-Downloads 3 months of data (Jan-Mar 2023) for the PySpark assignment.
+Downloads all 24 months of 2023-2024 data for the PySpark assignment.
 """
 
 import os
@@ -14,11 +14,32 @@ from pathlib import Path
 # NYC TLC data URL base
 BASE_URL = "https://d37ci6vzurychx.cloudfront.net/trip-data/"
 
-# Files to download (Q1 2023)
+# Files to download (All of 2023 and 2024)
 FILES = [
+    # 2023
     "yellow_tripdata_2023-01.parquet",
     "yellow_tripdata_2023-02.parquet",
     "yellow_tripdata_2023-03.parquet",
+    "yellow_tripdata_2023-04.parquet",
+    "yellow_tripdata_2023-05.parquet",
+    "yellow_tripdata_2023-06.parquet",
+    "yellow_tripdata_2023-07.parquet",
+    "yellow_tripdata_2023-08.parquet",
+    "yellow_tripdata_2023-09.parquet",
+    "yellow_tripdata_2023-10.parquet",
+    "yellow_tripdata_2023-11.parquet",
+    "yellow_tripdata_2023-12.parquet",
+    # 2024
+    "yellow_tripdata_2024-01.parquet",
+    "yellow_tripdata_2024-02.parquet",
+    "yellow_tripdata_2024-03.parquet",
+    "yellow_tripdata_2024-04.parquet",
+    "yellow_tripdata_2024-05.parquet",
+    "yellow_tripdata_2024-06.parquet",
+    "yellow_tripdata_2024-07.parquet",
+    "yellow_tripdata_2024-08.parquet",
+    "yellow_tripdata_2024-09.parquet",
+    "yellow_tripdata_2024-10.parquet",
 ]
 
 # Output directory
@@ -67,7 +88,8 @@ def main():
     print("="*70)
     print("NYC Taxi Data Download Script")
     print("="*70)
-    print(f"\nThis will download {len(FILES)} files (~3GB total)")
+    print(f"\nThis will download {len(FILES)} files (~24GB total)")
+    print(f"2023: 12 months, 2024: 10 months (Jan-Oct)")
     print(f"Destination: {DATA_DIR.absolute()}")
     
     # Create data directory if it doesn't exist
